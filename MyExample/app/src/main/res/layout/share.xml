@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Google+"
+            android:id="@+id/buttonShareGoogle"
+            android:layout_weight="0.04"
+            android:textStyle="bold"
+            android:textSize="24dp" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="FaceBook"
+            android:id="@+id/buttonShareFck"
+            android:layout_weight="0.04"
+            android:textStyle="bold"
+            android:textSize="24dp" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="WatsUp"
+            android:id="@+id/buttonShareWatsUp"
+            android:layout_weight="0.04"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>
