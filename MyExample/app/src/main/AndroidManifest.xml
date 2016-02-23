@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityListActivity"></activity>
+        <activity android:name=".ActivityListActivity" />
+        <activity
+            android:name=".LocalModeActivity"
+            android:label="@string/title_activity_local_mode"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

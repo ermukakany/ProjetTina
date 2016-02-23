@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item android:id="@+id/action_search"
+        android:icon="@drawable/ic_settings_backup_restore_black_24dp"
+        android:title="@string/action_restore"
+        app:showAsAction="always" />
+
 </menu>
