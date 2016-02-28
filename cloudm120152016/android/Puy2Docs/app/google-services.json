@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "puy2docs",
+    "project_number": "474071730911",
+    "name": "Puy2Docs"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474071730911:android:b6b7094d0550c511",
+        "client_id": "android:cloudm120152016.puy2docs",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "cloudm120152016.puy2docs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474071730911-t9erknfqqf1jr7j4q65dtmjaa6cfp1da.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cloudm120152016.puy2docs",
+            "certificate_hash": "670455F545B0F3B8E9727349F7A60A092BD621B3"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

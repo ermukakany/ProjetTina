@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Puy2Docs</string>
+    <string name="title_activity_base_login">Base Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_same_password">This password is not the same</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_birthday">Invalid form birthday JJ/MM/AAAA</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="password">Mot de passe</string>
+    <string name="passwordBis">Retaper le mot de passe</string>
+    <string name="lastname">Nom</string>
+    <string name="firstname">Prénom</string>
+    <string name="birthday">Date de naissance</string>
+    <string name="join">Créer un Compte</string>
+    <string name="login">Se connecter</string>
+
+    <string name="drive">Mes Fichiers</string>
+
+    <string name="account_exists">Vous avez déjà un compte ?</string>
+
+    <string name="sign_out">Se déconnecter</string>
+    <string name="signed_out">Se connecter</string>
+    <string name="disconnect">Se déconnecter</string>
+    <string name="desc_google_icon">Google Logo</string>
+
+    <string name="server_client_id">474071730911</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- Menu action -->
+    <string name="action_search">Search</string>
+    <string name="action_refresh">Refresh</string>
+
+    <!-- Menu drawer -->
+    <string name="home">Mes Fichier</string>
+    <string name="parameter">Paramètres</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_local_mode">LocalModeActivity</string>
+
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">cloudm120152016.puy2docs</string>
+    <string name="content_authority">cloudm120152016.puy2docs</string>
+</resources>
