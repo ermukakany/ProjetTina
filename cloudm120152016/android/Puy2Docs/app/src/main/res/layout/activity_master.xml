@@ -47,35 +47,142 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.MasterActivity">
 
-    <!-- This LinearLayout represents the contents of the screen  -->
-    <LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fitsSystemWindows="true">
 
-        <!-- The ActionBar displayed at the top -->
-        <include
-            layout="@layout/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/detail_backdrop_height"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:fitsSystemWindows="true">
 
-        <!-- The main content view where fragments are loaded -->
-        <FrameLayout
-            android:id="@+id/frameLayout"
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary">
+
+                <!-- The ActionBar displayed at the top -->
+                <!--<include
+                    layout="@layout/toolbar" />-->
+
+                <android.support.v7.widget.Toolbar
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimaryDark"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:layout_collapseMode="pin" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nest_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <!--<fragment class="cloudm120152016.puy2docs.activities.master.ItemsFragment"
-                android:id="@+id/list_item_fragment"
+            <FrameLayout
+                android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />-->
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
-        </FrameLayout>
-    </LinearLayout>
 
-<!-- The navigation drawer that comes from the left -->
-<!-- Note that `android:layout_gravity` needs to be set to 'start' -->
+            </FrameLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <cloudm120152016.puy2docs.activities.master.Fab
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:scaleType="center"
+        app:backgroundTint="@color/red"
+        app:elevation="6dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+        <!-- Overlay that dims the screen -->
+        <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Circular reveal container for the sheet -->
+        <io.codetail.widget.RevealLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|bottom"
+            android:orientation="vertical">
+
+            <!-- Sheet that contains your items -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/fab_sheet"
+                android:layout_width="250dp"
+                android:layout_height="300dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Recording -->
+                    <TextView
+                        android:id="@+id/fab_sheet_item_new_folder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                        android:clickable="true"
+                        android:text="@string/new_folder" />
+
+                    <TextView
+                        android:id="@+id/fab_sheet_item_new_file"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
+                        android:clickable="true"
+                        android:text="@string/new_file" />
+
+                </LinearLayout>
+
+                <!-- TODO: Put your sheet items here -->
+
+            </android.support.v7.widget.CardView>
+        </io.codetail.widget.RevealLinearLayout>
+
+<!--    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        app:fabSize="normal"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:pressedTranslationZ="12dp"
+        android:clickable="true"
+        app:backgroundTint="@color/red"
+        app:elevation="6dp" />-->
+
+    </RelativeLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nvView"
         android:layout_width="wrap_content"
@@ -84,4 +191,5 @@
         android:background="@android:color/white"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu_drawer"/>
+
 </android.support.v4.widget.DrawerLayout>

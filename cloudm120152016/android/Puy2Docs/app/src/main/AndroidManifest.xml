@@ -13,11 +13,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.READ_SYNC_STATS"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
-
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -38,16 +36,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
-            android:authorities="@string/content_authority"
             android:name=".utils.data.P2CProvider"
+            android:authorities="@string/content_authority"
             android:exported="false"
             android:syncable="true" />
 
-
         <!-- SyncAdapter's authentication service -->
-        <service android:name="cloudm120152016.puy2docs.utils.authentification.base.P2CAuthenticatorService">
+        <service android:name=".utils.authentification.base.P2CAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
@@ -59,19 +55,19 @@
 
         <!-- The SyncAdapter service -->
         <service
-            android:name="cloudm120152016.puy2docs.utils.authentification.base.P2CService"
-            android:exported="true"
-            >
+            android:name=".utils.authentification.base.P2CService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
+
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
 
-
-        <!--<service
+        <!--
+        <service
             android:name="cloudm120152016.puy2docs.utils.authentification.base.P2CSyncAdapter"
             android:exported="true"
             android:process=":sync">
@@ -81,17 +77,16 @@
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
-        </service>-->
+        </service>
+        -->
 
-        <activity
-            android:name=".MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.auth.base.BaseLoginActivity"
             android:label="@string/title_activity_base_login"
@@ -100,12 +95,12 @@
             android:name=".LoginChoiceActivity"
             android:noHistory="true" />
         <activity android:name=".activities.auth.base.BaseSignUpActivity" />
-
-        <activity
+        <!--
+            <activity
             android:name=".activities.MasterActivity"
             android:label="@string/drive"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        -->
         <activity
             android:name=".activities.ItemDetailActivity"
             android:label="@string/title_item_detail"
@@ -116,9 +111,12 @@
                 android:value=".activities.MasterActivity" />
         </activity>
         <activity
-            android:name=".activities.LocalModeActivity"
-            android:label="@string/title_activity_local_mode"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".ActivityListActivity"
+            android:label="@string/drive" />
+        <activity
+            android:name=".ShareAppActivity"
+            android:label="@string/title_activity_share_app"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

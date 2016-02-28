@@ -1,4 +1,4 @@
-package cloudm120152016.puy2docs.activities.master;
+package cloudm120152016.puy2docs.activities.master.fragments;
 
 import android.content.Context;
 import android.net.Uri;

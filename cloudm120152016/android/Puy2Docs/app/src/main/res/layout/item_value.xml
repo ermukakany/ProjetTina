@@ -83,8 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:textAppearance="?attr/textAppearanceListItem"
-                    android:textStyle="normal|bold"
-                    android:paddingBottom="3dp"/>
+                    android:textStyle="normal|bold" />
 
                 <TextView
                     android:id="@+id/modified"
@@ -93,10 +92,22 @@
                     android:layout_below="@id/name"
                     android:textAppearance="?attr/textAppearanceListItemSmall"
                     android:textStyle="normal"
+                    android:visibility="gone"
                     android:textSize="13sp"
                     android:paddingTop="3dp"
-                    android:textColor="#727272"
-                    android:text="Modifié le 12/12/2015"/>
+                    android:textColor="#727272"/>
+
+                <!--<TextView
+                    android:id="@+id/modified"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/name"
+                    android:textAppearance="?attr/textAppearanceListItemSmall"
+                    android:textStyle="normal"
+                    android:visibility="gone"
+                    android:textSize="13sp"
+                    android:paddingTop="3dp"
+                    android:textColor="#727272"/>-->
             </LinearLayout>
 
 

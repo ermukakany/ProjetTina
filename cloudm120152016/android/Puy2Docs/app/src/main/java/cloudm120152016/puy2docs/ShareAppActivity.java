@@ -1,4 +1,4 @@
-package cloudm120152016.puy2docs.activities;
+package cloudm120152016.puy2docs;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,14 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import cloudm120152016.puy2docs.R;
-
-public class LocalModeActivity extends AppCompatActivity {
+public class ShareAppActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_local_mode);
+        setContentView(R.layout.activity_share_app);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

@@ -43,6 +43,17 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'com.joanzapata.iconify:android-iconify-material:2.1.1' // android-iconify
+
+    compile 'com.gordonwong:material-sheet-fab:1.2.1' // material-sheet-fab
+
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.4@aar') {
+        transitive = true
+    }
+    compile('com.github.afollestad.material-dialogs:commons:0.8.5.4@aar') {
+        transitive = true
+    }
+
+    compile 'com.google.guava:guava:19.0'
 }
 
 

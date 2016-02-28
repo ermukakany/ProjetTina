@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeActivityFiles(View view) {
-        Intent intent = new Intent(this, MasterActivity.class);
+        Intent intent = new Intent(this,ActivityListActivity.class);
         startActivity(intent);
     }
 

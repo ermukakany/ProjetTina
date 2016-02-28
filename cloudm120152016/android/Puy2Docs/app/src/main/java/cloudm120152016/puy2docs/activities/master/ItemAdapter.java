@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,9 @@ import java.util.List;
 import java.util.Objects;
 
 import cloudm120152016.puy2docs.R;
+import cloudm120152016.puy2docs.activities.MasterActivity;
+import cloudm120152016.puy2docs.activities.master.fragments.ItemInfoFragment;
+import cloudm120152016.puy2docs.activities.master.fragments.ItemsFragment;
 import cloudm120152016.puy2docs.models.Item;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
@@ -41,7 +45,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView textView;
+        public TextView textViewName;
+        public TextView textViewDate;
         public ImageView imageView;
         public Button infoView;
         public Item item;
@@ -50,7 +55,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         public ViewHolder(View view) {
             super(view);
-            textView = (TextView) view.findViewById(R.id.name);
+
+            textViewName = (TextView) view.findViewById(R.id.name);
+            textViewDate = (TextView) view.findViewById(R.id.modified);
             imageView = (ImageView) view.findViewById(R.id.type);
             infoView = (Button) view.findViewById(R.id.info);
 
@@ -69,23 +76,46 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.item = items.get(position);
 
-        holder.textView.setText(holder.item.getName());
+        if (holder.item.getType() != null) {
+            createCard(holder);
+        }
 
-        if (Objects.equals(holder.item.getType(), TYPE_FOLDER)) {
+        else {
+
+        }
+
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+    void createCard(final ViewHolder holder) {
+        holder.textViewName.setText(holder.item.getName());
+
+        if (TextUtils.equals(holder.item.getType(), TYPE_FOLDER)) {
             holder.imageView.setImageDrawable(new IconicsDrawable(context, FontAwesome.Icon.faw_folder).sizeDp(48).color(Color.parseColor("#2196F3")));
         }
 
-        else if (Objects.equals(holder.item.getType(), TYPE_FILE)){
-            //**TODO : Handle different file type
+        else if (TextUtils.equals(holder.item.getType(), TYPE_FILE)){
+
             IIcon icon = new FileIcon(holder.item.getName()).getExt();
             int color = new ColorIcon(icon).getColor();
             holder.imageView.setImageDrawable(new IconicsDrawable(context, icon).sizeDp(48).color(color));
+
+            holder.textViewName.setPadding(0, 0, 0, 10);
+            holder.textViewDate.setText("LOOLOLO");
+            holder.textViewDate.setPadding(0, 10, 0, 0);
+            holder.textViewDate.setVisibility(View.VISIBLE);
+
         }
 
         else {
@@ -105,21 +135,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         holder.card.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Objects.equals(holder.item.getType(), TYPE_FILE)) {
+                if (TextUtils.equals(holder.item.getType(), TYPE_FILE)) {
                     Snackbar.make(v, holder.item.getName(), Snackbar.LENGTH_SHORT)
                             .setAction("Action", null).show();
                 } else {
+                    ((MasterActivity)context).currentFragment = ItemsFragment.newInstance(holder.item.getId());
                     FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frameLayout, ItemsFragment.newInstance(holder.item.getId())).addToBackStack(null).commit();
+                    //transaction.replace(R.id.frameLayout, ItemsFragment.newInstance(holder.item.getId())).addToBackStack(null).commit();
+                    transaction.replace(R.id.frameLayout, ((MasterActivity)context).currentFragment).addToBackStack(null).commit();
                 }
 
             }
         }));
-
     }
 
-    @Override
-    public int getItemCount() {
-        return items.size();
+    void setItemIcon() {
+
     }
 }

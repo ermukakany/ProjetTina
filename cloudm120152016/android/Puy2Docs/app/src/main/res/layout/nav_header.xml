@@ -1,13 +1,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="@dimen/detail_backdrop_height"
     android:orientation="vertical">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:background="@color/red"/>
-    <!--android:background="@drawable/nav_header_bg"-->
+        android:src="@drawable/logo"
+        android:background="@color/cardview_shadow_start_color"/>
 
     <TextView
         style="@style/TextAppearance.AppCompat.Subhead"

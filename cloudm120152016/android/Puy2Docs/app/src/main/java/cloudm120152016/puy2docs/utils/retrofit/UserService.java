@@ -45,18 +45,21 @@ public interface UserService {
     Call<ArrayList<Item>> getRoot();
 
     // Add a folder on root
+    @FormUrlEncoded
     @POST("/tree/")
     Call<ResponseBody> putRoot(@Field("name") String name);
 
     // Get folder contenant
-    @GET("/tree/{id_tree}")
+    @GET("/tree/{id_tree}/")
     Call<ArrayList<Item>> getFolder(@Path("id_tree") String id);
 
     // Create a folder in a folder
-    @GET("/tree/{id_tree}")
+    @FormUrlEncoded
+    @POST("/tree/{id_tree}/")
     Call<ResponseBody> putFolder(@Path("id_tree") String id, @Field("name") String name);
 
     // Create a document in root folder
+    @FormUrlEncoded
     @POST("/document/")
     Call<ResponseBody> putDocumentAtRoot(@Part("file") RequestBody file);
 
