@@ -53,7 +53,8 @@
     <string name="home">Mes Fichier</string>
     <string name="parameter">Paramètres</string>
 
-    <!-- Bottom sheet -->
+    <string name="new_item">Nouveau</string>
+    <!-- Bottom sheet new-->
     <string name="new_folder">Nouveau Dossier</string>
     <string name="new_file">Importer Fichier</string>
 
@@ -90,4 +91,5 @@
         <item>This is description 10</item>
     </string-array>
     <string name="title_activity_share_app">ShareAppActivity</string>
+    <string name="title_activity_selected_folder_file">SelectedFolderFileActivity</string>
 </resources>

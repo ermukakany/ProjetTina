@@ -8,12 +8,14 @@ public class Item implements Parcelable {
     String owner;
     String type;
     String name;
+    String last_modify;
 
-    public Item(String id,  String owner, String type, String name) {
+    public Item(String id,  String owner, String type, String name, String last_modify) {
         this.id = id;
         this.owner = owner;
         this.type = type;
         this.name = name;
+        this.last_modify = last_modify;
     }
 
     public String getId() {
@@ -46,6 +48,14 @@ public class Item implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLast_modify() {
+        return last_modify;
+    }
+
+    public void setLast_modify(String last_modify) {
+        this.last_modify = last_modify;
     }
 
     @Override

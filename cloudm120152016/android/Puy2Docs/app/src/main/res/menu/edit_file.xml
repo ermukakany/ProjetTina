@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Partager"
+        android:icon="@drawable/link"
+        />
+    <item
+        android:id="@+id/ddl"
+        android:title="Télécharger"
+        android:icon="@drawable/download"
+        />
+    <item
+        android:title="Déplacer"
+        android:icon="@drawable/folder_move"
+        />
+    <item
+        android:title="Renommer"
+        android:icon="@drawable/rename_box"
+        />
+    <item
+        android:id="@+id/delete_file"
+        android:title="Supprimer"
+        android:icon="@drawable/delete"
+        />
+</menu>

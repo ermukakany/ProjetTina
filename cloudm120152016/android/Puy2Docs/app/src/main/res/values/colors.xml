@@ -11,6 +11,8 @@
     <color name="blue_grey_900">#263238</color>
 
     <color name="red">#F44336</color>
+    <color name="grey_700">#616161</color>
+    <color name="grey_600">#757575</color>
 
     <color name="background_card">#fff</color>
 

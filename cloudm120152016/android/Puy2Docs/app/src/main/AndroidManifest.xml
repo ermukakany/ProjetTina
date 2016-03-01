@@ -23,6 +23,7 @@
 
 
     <!-- Getting access to external storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -116,6 +117,10 @@
         <activity
             android:name=".ShareAppActivity"
             android:label="@string/title_activity_share_app"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SelectedFolderFileActivity"
+            android:label="@string/title_activity_selected_folder_file"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

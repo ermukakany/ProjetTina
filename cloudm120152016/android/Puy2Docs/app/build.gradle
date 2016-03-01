@@ -24,18 +24,24 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
 
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
     compile 'com.google.android.gms:play-services-auth:8.4.0'
-    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:support-v4:23.2.0'
+
+    // Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
+    //compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
     //compile 'com.squareup.okhttp3:okhttp:3.0.0-RC1'
+    //compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.0.0-RC1'
     //compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile 'com.android.support:cardview-v7:23.1.1'
+
+    compile 'com.android.support:recyclerview-v7:23.2.0'
+    compile 'com.android.support:cardview-v7:23.2.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.0'
+
     compile 'com.mikepenz:iconics-core:2.5.5@aar'
     compile 'com.mikepenz:google-material-typeface:2.1.0.1.original@aar'
     compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
@@ -46,14 +52,28 @@ dependencies {
 
     compile 'com.gordonwong:material-sheet-fab:1.2.1' // material-sheet-fab
 
-    compile('com.github.afollestad.material-dialogs:core:0.8.5.4@aar') {
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.5@aar') {
         transitive = true
     }
-    compile('com.github.afollestad.material-dialogs:commons:0.8.5.4@aar') {
+    compile('com.github.afollestad.material-dialogs:commons:0.8.5.5@aar') {
         transitive = true
     }
 
     compile 'com.google.guava:guava:19.0'
+
+    // Fix 23.2.0
+    compile 'com.github.javiersantos:MaterialStyledDialogs:-SNAPSHOT'
+
+    // AVLoadingIndicatorView
+    compile 'com.wang.avi:library:1.0.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+
+    // bottomsheet
+    compile 'com.flipboard:bottomsheet-core:1.5.0'
+    compile 'com.flipboard:bottomsheet-commons:1.5.0' // optional
+
+    // FileDownloader
+    //compile 'com.liulishuo.filedownloader:library:0.2.0'
 }
 
 

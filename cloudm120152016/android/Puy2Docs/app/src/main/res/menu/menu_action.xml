@@ -12,9 +12,4 @@
         android:title="@string/action_refresh"
         android:orderInCategory="200"
         app:showAsAction="ifRoom" />
-
-<!--    <item android:id="@+id/action_new"
-        android:title="@string/action_new"
-        android:orderInCategory="300"
-        app:showAsAction="ifRoom" />-->
 </menu>
