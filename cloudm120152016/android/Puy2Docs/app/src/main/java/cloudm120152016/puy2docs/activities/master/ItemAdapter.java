@@ -8,10 +8,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +22,8 @@ import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.IIcon;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import cloudm120152016.puy2docs.R;
@@ -26,7 +31,7 @@ import cloudm120152016.puy2docs.activities.MasterActivity;
 import cloudm120152016.puy2docs.activities.master.fragments.ItemsFragment;
 import cloudm120152016.puy2docs.models.Item;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> implements Filterable {
 
     private Context context;
     private List<Item> items;
@@ -34,10 +39,62 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public ItemAdapter(Context context, List<Item> items) {
         this.context = context;
         this.items = items;
+
     }
 
     private static final String TYPE_FOLDER = "folder";
     private static final String TYPE_FILE = "documents";
+
+    @Override
+    public Filter getFilter() {
+        return new UserFilter(this, items);
+    }
+
+    private static class UserFilter extends Filter {
+
+        private final ItemAdapter adapter;
+
+        private final List<Item> originalList;
+
+        private final ArrayList<Item> filteredList;
+
+        private UserFilter(ItemAdapter adapter, List<Item> originalList) {
+            super();
+            this.adapter = adapter;
+            this.originalList = new LinkedList<>(originalList);
+            this.filteredList = new ArrayList<>();
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            filteredList.clear();
+            final FilterResults results = new FilterResults();
+
+            if (constraint.length() == 0) {
+                filteredList.addAll(originalList);
+            } else {
+                final String filterPattern = constraint.toString().toLowerCase();
+
+                for (final Item item : originalList) {
+                    if (item.getName().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            results.values = filteredList;
+            results.count = filteredList.size();
+            return results;
+        }
+
+
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            adapter.items.clear();
+            adapter.items.addAll((ArrayList<Item>) results.values);
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -118,13 +175,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 if (TextUtils.equals(holder.item.getType(), TYPE_FOLDER)) {
-                    ((MasterActivity)context).currentFragment.item_id = holder.item.getId();
-                    ((MasterActivity)context).sheetEditFolder();
-                }
-                else {
-                    ((MasterActivity)context).currentFragment.item_id = holder.item.getId();
-                    ((MasterActivity)context).currentFragment.fileName = holder.item.getName();
-                    ((MasterActivity)context).sheetEditFile();
+                    ((MasterActivity) context).currentFragment.item_id = holder.item.getId();
+                    ((MasterActivity) context).sheetEditFolder();
+                } else {
+                    ((MasterActivity) context).currentFragment.item_id = holder.item.getId();
+                    ((MasterActivity) context).currentFragment.fileName = holder.item.getName();
+                    ((MasterActivity) context).sheetEditFile();
                 }
 
                 //FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
@@ -140,10 +196,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                     Snackbar.make(v, holder.item.getName(), Snackbar.LENGTH_SHORT)
                             .setAction("Action", null).show();
                 } else {
-                    ((MasterActivity)context).currentFragment = ItemsFragment.newInstance(holder.item.getId());
-                    FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+                    ((MasterActivity) context).currentFragment = ItemsFragment.newInstance(holder.item.getId());
+                    FragmentTransaction transaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
                     //transaction.replace(R.id.frameLayout, ItemsFragment.newInstance(holder.item.getId())).addToBackStack(null).commit();
-                    transaction.replace(R.id.frameLayout, ((MasterActivity)context).currentFragment).addToBackStack(null).commit();
+                    transaction.replace(R.id.frameLayout, ((MasterActivity) context).currentFragment).addToBackStack(null).commit();
                 }
 
             }
@@ -155,5 +211,58 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         if (split.length == 2)
         return "Modifié le " + split[0] + " à " + split[1];
         return null;
+    }
+
+    public void animateTo(List<Item> models) {
+        applyAndAnimateRemovals(models);
+        applyAndAnimateAdditions(models);
+        applyAndAnimateMovedItems(models);
+    }
+
+    private void applyAndAnimateRemovals(List<Item> newModels) {
+        for (int i = items.size() - 1; i >= 0; i--) {
+            final Item model = items.get(i);
+            if (!newModels.contains(model)) {
+                Log.d("FILTER", "REMOVE");
+                removeItem(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(List<Item> newModels) {
+        for (int i = 0; i < newModels.size(); i++) {
+            final Item model = newModels.get(i);
+            if (!items.contains(model)) {
+                Log.d("FILTER", "ADD");
+                addItem(i, model);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(List<Item> newModels) {
+        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
+            final Item model = newModels.get(toPosition);
+            final int fromPosition = items.indexOf(model);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
+    }
+
+    public Item removeItem(int position) {
+        final Item model = items.remove(position);
+        notifyItemRemoved(position);
+        return model;
+    }
+
+    public void addItem(int position, Item model) {
+        items.add(position, model);
+        notifyItemInserted(position);
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final Item model = items.remove(fromPosition);
+        items.add(toPosition, model);
+        notifyItemMoved(fromPosition, toPosition);
     }
 }

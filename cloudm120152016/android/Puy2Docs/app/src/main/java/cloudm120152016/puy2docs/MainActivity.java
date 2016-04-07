@@ -8,6 +8,7 @@ import android.view.View;
 import cloudm120152016.puy2docs.activities.MasterActivity;
 import cloudm120152016.puy2docs.activities.auth.base.BaseLoginActivity;
 import cloudm120152016.puy2docs.activities.auth.base.BaseSignUpActivity;
+import cloudm120152016.puy2docs.activities.auth.base.Disconnect;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,13 +20,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void changeActivityLoginChoice(View view) {
-        Intent intent = new Intent(this, LoginChoiceActivity.class);
+    public void changeActivityFiles(View view) {
+        Intent intent = new Intent(this,MasterActivity.class);
         startActivity(intent);
     }
 
-    public void changeActivityFiles(View view) {
+    public void onClickButtonLocalFile(View view) {
         Intent intent = new Intent(this,ActivityListActivity.class);
+        startActivity(intent);
+    }
+
+    public void changeActivityLoginChoice(View view) {
+        Intent intent = new Intent(this, LoginChoiceActivity.class);
         startActivity(intent);
     }
 
@@ -36,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeActivitySignUp(View view) {
         Intent intent = new Intent(this, BaseSignUpActivity.class);
+        startActivity(intent);
+    }
+
+    public void userDisconnect(){
+        Intent intent = new Intent(this, Disconnect.class);
         startActivity(intent);
     }
 }

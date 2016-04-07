@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- <uses-permission android:name="cloudm120152016.puy2docs.permission.AUTHENTICATE_ACCOUNTS" /> -->
 
@@ -96,12 +97,10 @@
             android:name=".LoginChoiceActivity"
             android:noHistory="true" />
         <activity android:name=".activities.auth.base.BaseSignUpActivity" />
-        <!--
-            <activity
+        <activity
             android:name=".activities.MasterActivity"
-            android:label="@string/drive"
+            android:label="@string/home"
             android:theme="@style/AppTheme.NoActionBar" />
-        -->
         <activity
             android:name=".activities.ItemDetailActivity"
             android:label="@string/title_item_detail"
@@ -113,7 +112,7 @@
         </activity>
         <activity
             android:name=".ActivityListActivity"
-            android:label="@string/drive" />
+            android:label="@string/localstore" />
         <activity
             android:name=".ShareAppActivity"
             android:label="@string/title_activity_share_app"
@@ -121,6 +120,22 @@
         <activity
             android:name=".SelectedFolderFileActivity"
             android:label="@string/title_activity_selected_folder_file"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditSearchview"
+            android:label="@string/title_activity_edit_searchview"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -3,14 +3,20 @@ package cloudm120152016.puy2docs.activities.master.fragments;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
@@ -42,7 +48,7 @@ public class ItemsFragment extends Fragment {
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
-    RecyclerView.Adapter adapter;
+    ItemAdapter adapter;
 
     ArrayList<Item> items = new ArrayList<>();
     AccountManager manager;
@@ -60,6 +66,8 @@ public class ItemsFragment extends Fragment {
 
     public String item_id;
     public String fileName;
+
+    protected View view;
 
     /*@Bind(R.id.add)
     FloatingActionButton floatingActionButton;*/
@@ -98,6 +106,7 @@ public class ItemsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_items, container, false);
+        view = rootView;
         //return inflater.inflate(R.layout.fragment_items, container, false);
         ButterKnife.bind(this, rootView);
         return rootView;
@@ -142,7 +151,7 @@ public class ItemsFragment extends Fragment {
             @Override
             public void onResponse(Response<ArrayList<Item>> response) {
                 if (response.isSuccess()) {
-                    filter(response.body());
+                    filterData(response.body());
                     Log.d("itemLLLLLLLLLLLL", "" + items.size());
                     if (init) {
                         initAdapter();
@@ -173,7 +182,7 @@ public class ItemsFragment extends Fragment {
         stopAnim();
     }
 
-    void filter(ArrayList<Item> body) {
+    void filterData(ArrayList<Item> body) {
         Predicate<Item> predicate = new Predicate<Item>() {
             @Override
             public boolean apply(Item item) {
@@ -215,16 +224,19 @@ public class ItemsFragment extends Fragment {
                 @Override
                 public void onResponse(Response<ResponseBody> response) {
                     if (response.isSuccess()) {
-                        Log.d("Create folder on root", "OK");
                         getData(false);
+                        Snackbar.make(view, R.string.ok_new_folder, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                     } else {
-                        // TODO: Rollback to previous fragment
+                        Snackbar.make(view, R.string.no_new_folder, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
-
+                    Snackbar.make(view, R.string.fail, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
                 }
             });
         }
@@ -236,16 +248,19 @@ public class ItemsFragment extends Fragment {
                 @Override
                 public void onResponse(Response<ResponseBody> response) {
                     if (response.isSuccess()) {
-                        Log.d("Create folder", "OK");
                         getData(false);
+                        Snackbar.make(view, R.string.ok_new_folder, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                     } else {
-                        // TODO: Rollback to previous fragment
+                        Snackbar.make(view, R.string.no_new_folder, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
-
+                    Snackbar.make(view, R.string.fail, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
                 }
             });
         }
@@ -266,17 +281,19 @@ public class ItemsFragment extends Fragment {
                 @Override
                 public void onResponse(Response<ResponseBody> response) {
                     if (response.isSuccess()) {
-                        Log.v("Upload", "success");
                         getData(false);
-                    }
-                    else {
-                        // TODO: Rollback to previous fragment
+                        Snackbar.make(view, R.string.ok_new_file, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
+                    } else {
+                        Snackbar.make(view, R.string.no_new_file, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
-
+                    Snackbar.make(view, R.string.fail, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
                 }
             });
         }
@@ -288,38 +305,44 @@ public class ItemsFragment extends Fragment {
                 @Override
                 public void onResponse(Response<ResponseBody> response) {
                     if (response.isSuccess()) {
-                        Log.v("Upload", "success");
                         getData(false);
+                        Snackbar.make(view, R.string.ok_new_file, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                     } else {
-                        // TODO: Rollback to previous fragment
+                        Snackbar.make(view, R.string.no_new_file, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
-
+                    Snackbar.make(view, R.string.fail, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
                 }
             });
         }
     }
 
     public void deleteFolder() {
-        Log.d("DELETE CODE", "BEGIN");
         UserService userService = ServiceGenerator.createService(UserService.class, token);
         Call<ResponseBody> data = userService.deleteFolder(item_id);
         data.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response) {
-                Log.d("DELETE CODE", ""+response.code());
                 if (response.isSuccess()) {
                     getData(false);
+                    Snackbar.make(view, R.string.ok_del_folder, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, R.string.no_del_folder, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.d("DELETE CODE", "FAIL");
-                Log.d("DELETE CODE", t.toString());
+                Snackbar.make(view, R.string.fail, Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
             }
         });
     }
@@ -330,15 +353,20 @@ public class ItemsFragment extends Fragment {
         data.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response) {
-                Log.d("DELETE CODE", ""+response.code());
                 if (response.isSuccess()) {
                     getData(false);
+                    Snackbar.make(view, R.string.ok_del_file, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, R.string.no_del_file, Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-
+                Snackbar.make(view, R.string.fail, Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
             }
         });
     }
@@ -348,13 +376,42 @@ public class ItemsFragment extends Fragment {
     }
 
     void startAnim(){
-        getActivity().findViewById(R.id.recycler_view).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.recycler).setVisibility(View.GONE);
         getActivity().findViewById(R.id.avloadingIndicatorView).setVisibility(View.VISIBLE);
     }
 
     void stopAnim(){
         getActivity().findViewById(R.id.avloadingIndicatorView).setVisibility(View.GONE);
-        getActivity().findViewById(R.id.recycler_view).setVisibility(View.VISIBLE);
+        if (items.size() != 0) {
+            getActivity().findViewById(R.id.recycler).setVisibility(View.VISIBLE);
+            getActivity().findViewById(R.id.nothing).setVisibility(View.INVISIBLE);
+        }
+        else {
+            getActivity().findViewById(R.id.nothing).setVisibility(View.VISIBLE);
+        }
     }
 
+    public void inputQuery(String query) {
+
+        final ArrayList<Item> filteredModelList = filter(items, query);
+        adapter.animateTo(filteredModelList);
+
+        Log.d("FILTER", query);
+        //adapter.getFilter().filter(query);
+
+        recyclerView.scrollToPosition(0);
+    }
+
+    private ArrayList<Item> filter(ArrayList<Item> models, String query) {
+        query = query.toLowerCase();
+
+        final ArrayList<Item> filteredModelList = new ArrayList<>();
+        for (Item model : models) {
+            final String text = model.getName().toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
+    }
 }

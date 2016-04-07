@@ -15,43 +15,26 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_marginBottom="284dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
-        <Button
-            android:layout_width="fill_parent"
+        <Spinner
+            android:layout_width="343dp"
             android:layout_height="wrap_content"
-            android:text="Google+"
-            android:id="@+id/buttonGoogle"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.03"
-            android:textSize="24dp"
-            android:textStyle="bold|italic"
-            android:textColor="#e02a1d" />
-
-        <Button
-            android:layout_width="fill_parent"
+            android:id="@+id/spinner2" />
+        <Spinner
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Facebook"
-            android:id="@+id/buttonFacebook"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.03"
-            android:textSize="24dp"
-            android:textStyle="bold|italic"
-            android:textColor="#2323bf" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="WhatsApp"
-            android:id="@+id/buttonWhatsApp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.03"
-            android:textSize="24dp"
-            android:textStyle="bold|italic"
-            android:textColor="#0f5d31" />
+            android:id="@+id/spinner"
+            android:layout_alignParentTop="true" />
     </LinearLayout>
+
+
+
+
 
 </RelativeLayout>

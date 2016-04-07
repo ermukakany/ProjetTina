@@ -42,7 +42,7 @@ public class BaseSignUpActivity extends AppCompatActivity {
     EditText infoBirthday;
     Button btnChooseDate;
     View formView;
-    View progressView;
+    //View progressView;
 
     //Boolean join = false;
 
@@ -56,6 +56,7 @@ public class BaseSignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_sign_up);
+        stopAnim();
 
         email = (EditText) findViewById(R.id.email);
         username = (EditText) findViewById(R.id.username);
@@ -83,7 +84,7 @@ public class BaseSignUpActivity extends AppCompatActivity {
         });
 
         formView = findViewById(R.id.signup_form);
-        progressView = findViewById(R.id.signup_progress);
+        //progressView = findViewById(R.id.signup_progress);
 
         dateButton();
 
@@ -143,7 +144,8 @@ public class BaseSignUpActivity extends AppCompatActivity {
 
         if (!formValidate()) {
 
-            showProgress(true);
+            //showProgress(true);
+            startAnim();
 
             UserService userService = ServiceGenerator.createService(UserService.class);
             Call<ResponseBody> postData = userService.join(email.getText().toString(),
@@ -157,10 +159,15 @@ public class BaseSignUpActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Response<ResponseBody> response) {
                     if (response.isSuccess()) {
-                        showProgress(false);
+                        //showProgress(false);
+                        //stopAnim();
                         Toast.makeText(getApplicationContext(), "Inscription done", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), BaseLoginActivity.class);
                         startActivity(intent);
+                    }
+                    else {
+                        stopAnim();
+                        // // TODO: 03/03/2016  implémenter le reset du formulaire dans le cas d'une réponse négative
                     }
                 }
 
@@ -231,7 +238,7 @@ public class BaseSignUpActivity extends AppCompatActivity {
         return cancel;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    /*@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
@@ -257,5 +264,15 @@ public class BaseSignUpActivity extends AppCompatActivity {
             progressView.setVisibility(show ? View.VISIBLE : View.GONE);
             formView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
+    }*/
+
+    void startAnim(){
+        findViewById(R.id.signup_form_inputs).setVisibility(View.GONE);
+        findViewById(R.id.avloadingIndicatorView).setVisibility(View.VISIBLE);
+    }
+
+    void stopAnim(){
+        findViewById(R.id.avloadingIndicatorView).setVisibility(View.GONE);
+        findViewById(R.id.signup_form_inputs).setVisibility(View.VISIBLE);
     }
 }

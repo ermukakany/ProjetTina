@@ -19,9 +19,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -126,7 +128,7 @@ public class MasterActivity extends AppCompatActivity implements FileChooserDial
 
                 if (intent.getAction().equalsIgnoreCase(
                         DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
-                    Toast.makeText(context, "Download Complte", Toast.LENGTH_LONG)
+                    Toast.makeText(context, "Download Complete", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -222,6 +224,22 @@ public class MasterActivity extends AppCompatActivity implements FileChooserDial
                 new IconDrawable(this, MaterialIcons.md_search)
                         .color(Color.parseColor("#FFFFFF"))
                         .actionBarSize());
+
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
+        searchView.setQuery("", false);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                currentFragment.inputQuery(newText);
+                return true;
+            }
+        });
+
         return true;
     }
 

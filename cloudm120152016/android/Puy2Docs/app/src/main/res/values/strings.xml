@@ -12,7 +12,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_same_password">This password is not the same</string>
     <string name="error_field_required">This field is required</string>
-    <string name="error_invalid_birthday">Invalid form birthday JJ/MM/AAAA</string>
+    <string name="error_invalid_birthday">Invalid form birthday (J)J/(M)M/AAAA</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
@@ -27,6 +27,7 @@
     <string name="login">Se connecter</string>
 
     <string name="drive">Mes Fichiers</string>
+    <string name="localstore">Fichiers Locaux</string>
 
     <string name="account_exists">Vous avez déjà un compte ?</string>
 
@@ -43,20 +44,24 @@
     <string name="drawer_close">Close navigation drawer</string>
 
     <!-- Menu action -->
+    <string name="action_settings">Settings</string>
+    <string name ="about_dev">about_dev</string>
     <string name="action_search">Search</string>
+    <string name="search">Search</string>
     <string name="action_share">Share</string>
     <string name="action_delete">Delete</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_done">Done</string>
+    <string name="fbk_share">Facebook</string>
+    <string name="google_share">Google+</string>
+    <string name="puydoc2_share">PuyDoc2</string>
+
 
     <!-- Menu drawer -->
-    <string name="home">Mes Fichier</string>
-    <string name="parameter">Paramètres</string>
+    <!-- TODO: pbl name="home" utilisé 2 fois -->
+    <!--<string name="home">Mes Fichier</string>
+    <string name="parameter">Paramètres</string>-->
 
-    <string name="new_item">Nouveau</string>
-    <!-- Bottom sheet new-->
-    <string name="new_folder">Nouveau Dossier</string>
-    <string name="new_file">Importer Fichier</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -65,6 +70,30 @@
     <!-- SyncAdapter related -->
     <string name="sync_account_type">cloudm120152016.puy2docs</string>
     <string name="content_authority">cloudm120152016.puy2docs</string>
+
+    <!-- Menu drawer -->
+    <string name="home">Mes Fichiers</string>
+    <string name="sharing">Partagé avec moi</string>
+    <string name="local">Fichiers hors ligne</string>
+    <string name="setting">Paramètres</string>
+
+    <!-- Bottom sheet new-->
+    <string name="new_item">Nouveau</string>
+    <string name="new_folder">Nouveau Dossier</string>
+    <string name="new_file">Importer Fichier</string>
+
+    <!-- Snackbar -->
+    <string name="fail">Une erreur a été survenu</string>
+
+    <string name="ok_new_folder">Le dossier a été créé</string>
+    <string name="no_new_folder">Le dossier n\'a pas été créé</string>
+    <string name="ok_new_file">Le fichier a été créé</string>
+    <string name="no_new_file">Le fichier n\'a pas été créé</string>
+
+    <string name="ok_del_folder">Le dossier a été supprimé</string>
+    <string name="no_del_folder">Le dossier n\'a pas été supprimé</string>
+    <string name="ok_del_file">Le fichier a été supprimé</string>
+    <string name="no_del_file">Le fichier n\'a pas été supprimé</string>
 
     <string-array name="titles">
         <item>Meme 1</item>
@@ -92,4 +121,7 @@
     </string-array>
     <string name="title_activity_share_app">ShareAppActivity</string>
     <string name="title_activity_selected_folder_file">SelectedFolderFileActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_edit_searchview">EditSearchview</string>
+
 </resources>

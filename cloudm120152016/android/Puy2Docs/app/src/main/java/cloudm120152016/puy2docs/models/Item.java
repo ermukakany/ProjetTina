@@ -19,6 +19,7 @@ public class Item implements Parcelable {
     }
 
     public String getId() {
+
         return id;
     }
 

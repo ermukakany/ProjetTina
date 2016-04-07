@@ -30,6 +30,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.2.0'
 
     // Retrofit
+    //compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
     //compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
@@ -74,6 +75,7 @@ dependencies {
 
     // FileDownloader
     //compile 'com.liulishuo.filedownloader:library:0.2.0'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
 
 

@@ -4,59 +4,89 @@ package cloudm120152016.puy2docs;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
-
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 
 public class ActivityListActivity extends AppCompatActivity {
-   private File m_currentDir;
+    private File m_currentDir;
     ListView listView;
-    ImageView imgView;
     ListAdapter m_model;
-    CheckBox checkBoxfile;
     ArrayList<FileItem> m_data;
+    private ShareActionProvider shared;
+    /*private MenuItem mSearchAction;
+    private boolean isSearchOpened = false;
+    private EditText edtSeach;*/
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_list);
 
-        Resources res = getResources();
         listView = (ListView) findViewById(R.id.listView);
-        imgView = (ImageView)findViewById(R.id.imageViewItem);
-        checkBoxfile =(CheckBox)findViewById(R.id.checkBoxfile);
-
         m_currentDir = new File("/sdcard/");
         m_data = getDataModel(m_currentDir);
-        m_model = new ListAdapter(this,m_data);
+        m_model = new ListAdapter(this, m_data);
         listView.setAdapter(m_model);
 
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_actionbar_folderfile, menu);
+
+        /*
+        MenuItem itemShared = (MenuItem) menu.findItem(R.id.action_share);
+        shared =(ShareActionProvider)itemShared.getActionProvider();
+
+        Intent intent = getDefaultShareIntent();
+
+
+        if(intent!=null)
+            shared.setShareIntent(intent);
+            */
         return true;
+
+    }
+
+    private Intent getDefaultShareIntent(){
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "SUBJECT");
+        intent.putExtra(Intent.EXTRA_TEXT,"Simple Contenu !");
+        return intent;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -65,108 +95,104 @@ public class ActivityListActivity extends AppCompatActivity {
             case R.id.action_done:
                 ListCheckedItem();
                 return true;
-            case R.id.action_refresh:
-
+            case R.id.action_reset_checked:
                 ResetCheckBox();
                 return true;
             case R.id.action_search:
-                SearchFodder();
+                ActionSearch();
                 return true;
-            case R.id.action_share:
-                ActionShare();
-                return true;
+            //case R.id.action_share:
+            // ActionShare();
+            //return true;
             case R.id.action_Delete:
-                DeleteSelectedFile(m_currentDir);
+                DeleteSelectedFile();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public ArrayList<FileItem> getDataModel(File path)
-    {
+    static ArrayList<FileItem> getDataModel(File path) {
         File[] fileArray = path.listFiles();
         ArrayList<FileItem> fileItemArrayList = new ArrayList<FileItem>();
 
-        for(File f:fileArray)
-        {
+        for (File f : fileArray) {
             FileItem Itemfile = new FileItem(f);
             fileItemArrayList.add(Itemfile);
         }
         return fileItemArrayList;
     }
-    private void ResetCheckBox() {
-        /** get all values of the EditText-Fields */
-        View v, row;
-        CheckBox checkBox;
-        for (int i = 0; i < listView.getCount(); i++) {
-            v = listView.getAdapter().getView(i, null, null);
-            row = v.findViewById(i);
-            checkBox = (CheckBox) row.findViewById(R.id.checkBoxfile);
-            checkBox.setChecked(false);
-        }
-        for(FileItem item :m_data)
-        {
-            if(item.getChecked())
-            {
-                item.setChecked(false);
-            }
-        }
 
+    private void ResetCheckBox() {
+        for (FileItem item : m_data) {
+            item.setChecked(false);
+        }
+        m_model.notifyDataSetChanged();
+        //new AlertDialog.Builder(this).setTitle("Warning").setMessage("Refresh done!").setNeutralButton("Ok", null).show();
     }
 
-    public void ListCheckedItem()
-    {
+    public void ListCheckedItem() {
         String CheckeItems = "";
-        for(FileItem item :m_data)
-        {
-            if(item.getChecked())
-            {
-                CheckeItems += item.getFile().getName()+"\n";
+        for (FileItem item : m_data) {
+            if (item.getChecked()) {
+                CheckeItems += item.getFile().getName() + "\n";
             }
         }
-       // new AlertDialog.Builder(this).setTitle("Warning").setMessage(CheckeItems).setNeutralButton("Close", null).show();
-        new AlertDialog.Builder(this).setTitle("Warning").setMessage(CheckeItems).setNegativeButton("Cancel", null).setPositiveButton("OK", null).show();
+        new AlertDialog.Builder(this).setTitle("Warning").setMessage(CheckeItems).setNeutralButton("Close", null).show();
 
     }
 //action share et delete, selecteDone
 
-    public void ActionShare()
-    {
+   /* public void ActionShare() {
         Intent share_activity = new Intent(this, ShareAppActivity.class);
         startActivity(share_activity);
+    }*/
+
+    public void ActionSearch() {
+        //Intent search_activity = new Intent(this, SearchActivity.class);
+        Intent search_activity = new Intent(this, EditSearchview.class);
+        startActivity(search_activity);
     }
 
 
 
 
-    public void DeleteSelectedFile(File path)
-    {
-        if(path.isDirectory())
+    public void DeleteSelectedFile() {
 
-        {
-            File[] files = path.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) {
-                    deleteFile(files[i].getName());
-                }
+        //path= new File("/sdcard/");
+
+
+        /*for (FileItem item : m_data) {
+            if (item.getChecked()) {
+                String CheckeItem = item.getFile().getName();
+                File path = item.getFile();
+                path.delete();
+                //m_data.remove(item);
+                new AlertDialog.Builder(this).setTitle("Warning").setMessage(CheckeItem).setNeutralButton("Ok", null).show();
+            }
+        }*/
+
+        Iterator<FileItem> i = m_data.iterator();
+        while (i.hasNext()) {
+            FileItem item = i.next(); // must be called before you can call i.remove()
+            if (item.getChecked()) {
+                String CheckeItem = item.getFile().getName();
+                File path = item.getFile();
+                path.delete();
+                i.remove();
+                new AlertDialog.Builder(this).setTitle("Voulez-vous l'éffacer ?").setMessage(CheckeItem).setNeutralButton("Ok", null).show();
             }
 
-        }else
-            path.delete();
-    }
-
-
-    public void SearchFodder()
-    {
+        }
+        m_model.notifyDataSetChanged();
 
     }
-
 }
 
-class ListAdapter extends ArrayAdapter {
+class ListAdapter extends ArrayAdapter implements Filterable{
 
     Context context;
+    FileFilter m_fileFilter = null;
     private ArrayList<FileItem> m_fileList;
 
     public ListAdapter(Context c,ArrayList<FileItem> fileList) {
@@ -187,6 +213,12 @@ class ListAdapter extends ArrayAdapter {
         //mResource = resource;
     }
     @Override
+    public Filter getFilter() {
+        if (m_fileFilter == null)
+            m_fileFilter = new FileFilter();
+        return m_fileFilter;
+    }
+    @Override
     public int getCount() {
         return m_fileList.size();
     }
@@ -205,7 +237,7 @@ class ListAdapter extends ArrayAdapter {
 
         CheckBox checkBox =(CheckBox)rowItem.findViewById(R.id.checkBoxfile);
 
-       // new AlertDialog.Builder(context).setTitle("Warning").setMessage("liste file").setNeutralButton("Close", null).show();
+        // new AlertDialog.Builder(context).setTitle("Warning").setMessage("liste file").setNeutralButton("Close", null).show();
         try{
 
             File ff = m_fileList.get(position).getFile();
@@ -215,20 +247,18 @@ class ListAdapter extends ArrayAdapter {
             String date_modify = formater.format(lastModDate);
 
             description.setText(date_modify);
-
+            checkBox.setChecked(m_fileList.get(position).getChecked());
             checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     m_fileList.get(position).Triggle();
                 }
             });
-            if(ff.isDirectory())
-            {
-                folderIcon.setImageResource(R.drawable.ic_folder_open_black_36dp);
 
-            }
+            if(ff.isDirectory())
+                folderIcon.setImageResource(R.drawable.closed_folder_yellow);
             else {
-                folderIcon.setImageResource(R.drawable.ic_insert_drive_file_black_24dp);
+                folderIcon.setImageResource(R.drawable.imagefile);
             }
 
         }catch(Exception e)
@@ -236,9 +266,56 @@ class ListAdapter extends ArrayAdapter {
 
         }
 
-       return rowItem;
+        return rowItem;
     }
 
+    private class FileFilter extends Filter {
+        @Override
+        protected Filter.FilterResults performFiltering(CharSequence constraint) {
+            Filter.FilterResults results = new FilterResults();
+            //new AlertDialog.Builder(context).setTitle("Warning").setMessage(constraint.toString().toUpperCase()).setNeutralButton("Close", null).show();
+            if (constraint == null || constraint.length() == 0) {
+                // No filter implemented we return all the list
+                results.values = m_fileList;
+                results.count = m_fileList.size();
+
+            } else {
+
+                ArrayList<FileItem> filterList = new ArrayList<FileItem>();
+                //new AlertDialog.Builder(context).setTitle("Warning").setMessage(constraint.toString().toUpperCase()).setNeutralButton("Close", null).show();
+
+
+                for (FileItem p : m_fileList) {
+                    final String text = p.getFile().getName().toUpperCase();
+                    if (text.contains(constraint.toString().toUpperCase())){
+                        filterList.add(p);
+
+                    }
+
+                }
+
+                results.values = filterList;
+                results.count = filterList.size();
+
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, Filter.FilterResults results) {
+            if (results.count == 0)
+                notifyDataSetInvalidated();
+            else {
+                m_fileList = (ArrayList<FileItem>) results.values;
+                notifyDataSetChanged();
+
+
+            }
+
+        }
+
+
+    }
 }
 
 

@@ -47,30 +47,6 @@
                 android:textColor="@color/grey_600"
                 android:foreground="?android:attr/selectableItemBackground"/>
 
-<!--            <ImageButton
-                android:id="@+id/info"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="15dp"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:ico_icon="gmd-plus-circle"
-                android:contentDescription="tset" />-->
-
-<!--            <com.mikepenz.iconics.view.IconicsImageView
-                android:id="@+id/info"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="15dp"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:focusable="true"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:iiv_color="#B6B6B6"
-                app:iiv_icon="faw-info-circle" />-->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -97,17 +73,6 @@
                     android:paddingTop="3dp"
                     android:textColor="#727272"/>
 
-                <!--<TextView
-                    android:id="@+id/modified"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_below="@id/name"
-                    android:textAppearance="?attr/textAppearanceListItemSmall"
-                    android:textStyle="normal"
-                    android:visibility="gone"
-                    android:textSize="13sp"
-                    android:paddingTop="3dp"
-                    android:textColor="#727272"/>-->
             </LinearLayout>
 
 
