@@ -1,25 +1,24 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import {NavController, NavParams } from 'ionic-angular';
 
-import { TabsPage } from '../pages/tabs/tabs';
+import { TabsPage } from '../tabs/tabs';
+import { WelcomePage } from '../welcome/welcome';
+
 @Component({
-	selector : 'page-loin',
+	selector : 'page-login',
 	templateUrl : 'login.html',
 })
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-@Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
-})
+	
 export class LoginPage {
+	@ViewChild('username') uname;
+	@ViewChild('password') password;
+	rootPage:any = TabsPage;
+  pages: Array<{title: string, component: any}>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  	this.pages = [
+    	{title : 'Mon profile',component:TabsPage}];
   }
 
   /*ionViewDidLoad() {
@@ -27,7 +26,13 @@ export class LoginPage {
   }*/
   
   doLogin(){
-	   this.navCtrl.setRoot('HomePage');
+	   //this.navCtrl.setRoot('TabsPage');
+
+	   //console.log(this.uname.value, this.password.value);
+
+	   if(this.uname.value == "admin" && this.password.value == "123"){
+	   			this.navCtrl.push(TabsPage);
+	   }
   }
 
 }

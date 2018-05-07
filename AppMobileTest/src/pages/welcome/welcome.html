@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ingérop prime App</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+ <ion-content padding id="welcome">
+  <div id = "image"><img src="assets/imgs/indexingerop.png" class="logo"/></div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>Soyez bienvenue !</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid >
+    <ion-row>
+       <ion-col center text-center>
+        <button ion-button full color="lightText" (click)="login()" #seconn color="primaire">Seconnecter</button>
+		</ion-col>
+    </ion-row>
+    <ion-row> 
+       <ion-col center text-center>
+        <button ion-button full color="success" (click)="signup()" #demande color="primaire">Envoyer une demande</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

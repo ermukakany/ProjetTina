@@ -11,4 +11,9 @@ export class AboutPage {
 
   }
 
+doClickprofile(){
+	 // Remove API token 
+    const root = this.getRootNav();
+    root.popToRoot();
+	}
 }

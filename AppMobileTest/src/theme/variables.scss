@@ -25,7 +25,7 @@ $app-direction: ltr;
 
 
 
-// Named Color Variables
+// Named Color Variables primary:    #488aff
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
 // It's highly recommended to change the default colors
@@ -34,14 +34,16 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #113766,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  energy:     #113766,
+  primaire : #488aff
 );
 
-
+$toolbar-background: color($colors, primary);
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
