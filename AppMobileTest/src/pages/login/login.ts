@@ -14,7 +14,7 @@ export class LoginPage {
   resposeData : any;
   userData = {"username":"", "password":""};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public authService :AuthServiceProvider,private toastCtrl:ToastController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,public authService :AuthServiceProvider,private toastCtrl:ToastController){}
 
   /*ionViewDidLoad() {
     console.log('ionViewDidLoad TabsPage');

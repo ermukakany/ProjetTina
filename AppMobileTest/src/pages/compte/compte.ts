@@ -9,9 +9,13 @@ import { LoginPage } from '../login/login';
 
 export class ComptePage {
 	responseData:any;
-	userData={"username":"","password":"","email":"","name":""};
+	userData={"username":"","password":"","name":"","email":""};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService :AuthServiceProvider) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService :AuthServiceProvider) {
+	  
+	 const data = JSON.parse(localStorage.getItem('userData'));
+	 this.responseData = data.userData;
+  }
 
 	signup(){
       this.authService.postData(this.userData,"signup").then((result) => {
@@ -19,7 +23,7 @@ export class ComptePage {
 
 		console.log(this.responseData);
 		localStorage.setItem('userData',JSON.stringify(this.responseData));
-		this.navCtrl.push(AboutPage);
+		this.navCtrl.push(LoginPage);
       
     }, (err) => {
       // Error log

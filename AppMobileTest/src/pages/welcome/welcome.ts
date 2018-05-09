@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+
 import { LoginPage } from '../login/login';
 import { ComptePage } from '../compte/compte';
 
@@ -8,9 +9,10 @@ import { ComptePage } from '../compte/compte';
   templateUrl: 'welcome.html',
 })
 export class WelcomePage {
-  rootPage:any = LoginPage;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) { }
+  responseData: any;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
 
   login(){
   	this.navCtrl.push(LoginPage);

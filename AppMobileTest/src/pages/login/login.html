@@ -5,19 +5,19 @@
 </ion-header>
 
 <ion-content padding>
-  <form ng-submit = "doLogin()" >
-    <ion-list>
-      <ion-item>
-        <ion-label floating>Pseudo</ion-label>
-        <ion-input type="text" [(ngModel)]="userData.username" name = "username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>password</ion-label>
-        <ion-input type="password" [(ngModel)]="userData.password"></ion-input>
-            </ion-item>
-    </ion-list>
-    <div padding>
-      <button ion-button full (click)="login()">Login</button>
-    </div>
-  </form>
+<ion-list>
+
+  <ion-item>
+    <ion-label fixed>Username</ion-label>
+    <ion-input type="text" value="" [(ngModel)]="userData.username"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label fixed>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="userData.password"></ion-input>
+  </ion-item>
+
+  <button ion-button block color="primary" (click)="login()">Login</button>
+
+</ion-list>
 </ion-content>
