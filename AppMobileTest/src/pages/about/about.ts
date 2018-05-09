@@ -12,8 +12,10 @@ export class AboutPage {
   }
 
 doClickprofile(){
-	 // Remove API token 
+	 /*Remove API token 
     const root = this.getRootNav();
-    root.popToRoot();
+    root.popToRoot();*/
 	}
 }
+
+//mk.tina@ingerop.com

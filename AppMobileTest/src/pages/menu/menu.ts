@@ -1,6 +1,5 @@
 import { Component,ViewChild  } from '@angular/core';
-import {NavController, NavParams } from 'ionic-angular';
-import { Nav,Platform } from 'ionic-angular';
+import {Nav,NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 
 export interface PageInterface {

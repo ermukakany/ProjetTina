@@ -1,25 +1,34 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ComptePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AuthServiceProvider} from '../../providers/auth-service/auth-service';
+import {AboutPage} from '../about/about';
+import { LoginPage } from '../login/login';
 
-@IonicPage()
-@Component({
-  selector: 'page-compte',
-  templateUrl: 'compte.html',
-})
+@Component({selector: 'page-compte',templateUrl: 'compte.html'})
+
 export class ComptePage {
+	responseData:any;
+	userData={"username":"","password":"","email":"","name":""};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService :AuthServiceProvider) {}
+
+	signup(){
+      this.authService.postData(this.userData,"signup").then((result) => {
+      this.responseData = result;
+
+		console.log(this.responseData);
+		localStorage.setItem('userData',JSON.stringify(this.responseData));
+		this.navCtrl.push(AboutPage);
+      
+    }, (err) => {
+      // Error log
+    });
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ComptePage');
+  login(){
+    //Login page link
+    this.navCtrl.push(LoginPage);
   }
-
 }

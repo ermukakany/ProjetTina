@@ -1,8 +1,8 @@
-import { Component,ViewChild } from '@angular/core';
-import {NavController, NavParams } from 'ionic-angular';
+import { Component} from '@angular/core';
+import {NavController, NavParams,ToastController} from 'ionic-angular';
 
+import { AuthServiceProvider} from '../../providers/auth-service/auth-service';
 import { TabsPage } from '../tabs/tabs';
-import { WelcomePage } from '../welcome/welcome';
 
 @Component({
 	selector : 'page-login',
@@ -10,29 +10,47 @@ import { WelcomePage } from '../welcome/welcome';
 })
 	
 export class LoginPage {
-	@ViewChild('username') uname;
-	@ViewChild('password') password;
-	rootPage:any = TabsPage;
-  pages: Array<{title: string, component: any}>;
+	
+  resposeData : any;
+  userData = {"username":"", "password":""};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-  	this.pages = [
-    	{title : 'Mon profile',component:TabsPage}];
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams,public authService :AuthServiceProvider,private toastCtrl:ToastController) {}
 
   /*ionViewDidLoad() {
     console.log('ionViewDidLoad TabsPage');
   }*/
   
-  doLogin(){
-	   //this.navCtrl.setRoot('TabsPage');
+  login(){
 
-	   //console.log(this.uname.value, this.password.value);
+	if(this.userData.username && this.userData.password){
+		this.authService.postData(this.userData, "login").then((result) =>{
+		this.resposeData = result;
+		console.log(this.resposeData);
+	if(this.resposeData.userData){
+		localStorage.setItem('userData', JSON.stringify(this.resposeData) )
+		this.navCtrl.push(TabsPage);
+		}
+	else{
+		this.presentToast("Please give valid username and password");
+		}
 
-	   if(this.uname.value == "admin" && this.password.value == "123"){
-	   			this.navCtrl.push(TabsPage);
-	   }
+    }, (err) => {
+      //Connection failed message
+    });
+   }
+   else{
+    this.presentToast("Give username and password");
+   }
+  
   }
 
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+
+	}
 }

@@ -1,17 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { Component, ViewChild } from '@angular/core';
 import { Nav,Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
-import { MenuPage } from '../pages/menu/menu';
-import { LoginPage } from '../pages/login/login';
-import { SpecialPage } from '../pages/special/special';
 import { WelcomePage } from '../pages/welcome/welcome';
 
 @Component({

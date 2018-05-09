@@ -1,11 +1,11 @@
 import { NgModule, ErrorHandler} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Nav, IonicApp, IonicModule,IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule,IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule} from "@ionic/storage";
 import { MyApp } from './app.component';
 
 import { HttpModule } from '@angular/http';
-import { AuthService } from '../providers/auth-service';
+import {AuthServiceProvider} from '../providers/auth-service/auth-service';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -19,7 +19,6 @@ import { ComptePage } from '../pages/compte/compte';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 @NgModule({
   declarations: [
@@ -54,12 +53,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   ],
   providers: [
     StatusBar,
-    SplashScreen, AuthService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthServiceProvider
+    SplashScreen,AuthServiceProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
-
-
-
