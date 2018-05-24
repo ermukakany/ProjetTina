@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Créer un compte</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="appBackground">
+  <ion-card>
+    <ion-card-header>
+     Ajout un compte
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Nom</ion-label>
+          <ion-input type="text" [(ngModel)]="userData.name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="userData.email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Utilisateur</ion-label>
+          <ion-input type="text" [(ngModel)]="userData.username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Mot de passe</ion-label>
+          <ion-input type="password" [(ngModel)]="userData.password"></ion-input>
+        </ion-item>
+		
+        <ion-item>
+          <ion-label>Statut d'utilisateur</ion-label>
+			<ion-select placeholder="Select">
+				<ion-option *ngFor="let item of strings" (ngValue)="item" (click)="selectItem()">
+					{{item.nom}}
+				</ion-option>
+			</ion-select>
+        </ion-item>
+
+        <button ion-button full color="success" (click)="signup()">Sign up</button>
+        <a href="#" (click)="login()">Login Page</a>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

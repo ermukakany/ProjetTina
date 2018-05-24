@@ -1,0 +1,27 @@
+<ion-header >
+  <ion-navbar>
+	<ion-buttons start>
+	  <button ion-button menuToggle>
+		  <ion-icon name="menu"></ion-icon>
+	  </button>
+	</ion-buttons>
+    <ion-title>Créer un formulaire</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top color="primary">
+	<ion-segment [(ngModel)]="segment" color="light">
+		<ion-segment-button value="business">
+				Business
+		</ion-segment-button>
+		<ion-segment-button value="services">
+				Service
+		</ion-segment-button>
+		<ion-segment-button value="responsable">
+				Responsable
+		</ion-segment-button>
+	</ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding id = "form">
+
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+	<ion-buttons start>
+	  <button ion-button menuToggle>
+		  <ion-icon name="menu"></ion-icon>
+	  </button>
+	</ion-buttons>
+    <ion-title>Contact </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+	    <ion-icon name="more"></ion-icon>
+	  </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-searchbar placeholder="Search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header> 
+<ion-content padding id ="contpg">
+  <ion-list inset>
+    <ion-item *ngFor="let user of users">
+      <ion-avatar item-start>	
+		<ion-icon name="person"></ion-icon>
+	  </ion-avatar>
+	  <h2>{{user.name}}</h2>
+	  <p>{{user.email}}</p>
+	  <p>{{user.nom}}</p>
+	  <ion-buttons item-end>
+	   	 <button ion-button icon-only (click)="onClickUser($event)"> 
+		  <ion-icon name="more"></ion-icon>
+		 </button>
+	  </ion-buttons>
+    </ion-item>
+  </ion-list>
+  <div text-center>
+	<button ion-button round ion-right (click)="adduser()">Ajouter un compte</button>
+   </div>
+</ion-content>
+

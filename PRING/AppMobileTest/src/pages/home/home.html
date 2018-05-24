@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title >Accueil</ion-title>
+    <button ion-button float-right (click)="logoutClicked()">
+      <ion-icon name="power" ion-right></ion-icon>
+    </button>         
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Ingérop App</h2>
+  <div><h4>Qui sommes-nous</h4></div>
+  
+  <div>
+   <p>
+	Ingérop est un acteur de référence en France et un acteur significatif 
+	à l’international, de l’ingénierie et du conseil en mobilité durable,
+	transition énergétique et cadre de vie, grands enjeux d'aujourd'hui et demain.
+   </p>
+  </div>
+  
+  <div>
+	<table>
+		<tr>
+			<ion-img width="70" height="70" src="assets/imgs/Picto_Batiments_seul.png"></ion-img>
+			<ion-img width="70" height="70" src="assets/imgs/Picto_Eau_environnement_seul.png" ></ion-img>
+			<ion-img width="70" height="70" src="assets/imgs/Picto_Energie_Industrie_seul.png"></ion-img>
+			<ion-img width="70" height="70" src="assets/imgs/picto-ville-et-mobilite-home.png" ></ion-img>
+		</tr>
+	 </table>
+  </div>  
+   
+  <div>
+	   <p> L'ingénierie du groupe est tournée vers l'excellence technique, l'expertise, 
+	   l'innovation, la transversalité et l'adaptation des solutions aux recherches 
+	   et performances fonctionnelles de ses clients....... 
+	   </p>
+  </div>
+  
+ <div>
+	<p>
+	Ingérop App est une application mobile .................................
+	</p>
+  </div>
+</ion-content>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
